@@ -1,9 +1,16 @@
-export default function Dashboard() {
+import Link from "next/link";
+import {buttonVariants} from "@/components/ui/button";
+
+export default async function Dashboard() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-        <p className="text-lg">Welcome to your dashboard!</p>
-        <p className="text-sm text-gray-500 mt-2">This is a placeholder for your dashboard content.</p>
+        <div>
+            <div className={'flex items-center justify-between mb-4'}>
+                <h2 className={'text-xl font-medium'}>Your Blog Articles</h2>
+                <Link className={buttonVariants()} href="/dashboard/create">
+                    Create a Blog
+                </Link>
+
+            </div>
         </div>
     );
 }
