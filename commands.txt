@@ -1,0 +1,6 @@
+pnpm i -D prisma
+pnpm i @prisma/client
+pnpm dlx prisma init 
+-> add neon config to (db url) to .env 
+pnpm dlx prisma db push 
+pnpm dlx prisma studio -> openup prisma client 
