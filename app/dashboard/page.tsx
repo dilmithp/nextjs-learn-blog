@@ -1,8 +1,9 @@
 import Link from "next/link";
-import {buttonVariants} from "@/components/ui/button";
-import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import {prisma} from "@/app/utils/db";
-import {BlogpostCard} from "@/components/general/BlogpostCard";
+import { redirect } from 'next/navigation';
+import { buttonVariants } from "@/components/ui/button";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { prisma } from "@/app/utils/db";
+import { BlogpostCard } from "@/components/general/BlogpostCard";
 
 async function getBlogs(userId: string) {
     const data = await prisma.blogPost.findMany({
@@ -15,10 +16,17 @@ async function getBlogs(userId: string) {
     });
     return data;
 }
+
 export default async function Dashboard() {
-    const {getUser} = getKindeServerSession();
+    const { getUser } = getKindeServerSession();
     const user = await getUser();
+
+    if (!user) {
+        redirect('/login');
+    }
+
     const data = await getBlogs(user.id);
+
     return (
         <div>
             <div className={'flex items-center justify-between mb-4'}>
